@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Agenda de contacto</title>
+</head>
+<body>
+    <header>
+        <h1>Agenda</h1>
+    </header>
+    <main>
+        <form>
+            <h2>Añadir Contacto</h2>
+            <label for="name">
+                <input type="text" placeholder="Nombre" id="name">
+            </label>
+            <label for="tel">
+                <input type="number" id="tel" placeholder="Telefono">
+            </label>
+            <label for="mail">
+                <input type="email" id="mail" placeholder="Email">
+            </label>
+            <button type="submit" id="add-btn">
+                Añadir
+            </button>
+        </form>
+        <div class="agenda" id="agenda">
+            <h2>Contactos</h2>
+        </div>
+    </main>
+    <footer>
+        <h3>Creado por Diego Martinez</h3>
+    </footer>
+
+    <script src="./main.js"></script>
+</body>
+</html>
