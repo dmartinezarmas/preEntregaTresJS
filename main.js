@@ -1,3 +1,43 @@
+const verDog = async () => {
+let picDog
+fetch('https://dog.ceo/api/breeds/image/random')
+.then((response) => response.json())
+.then((info) => picDog = info.message)
+let fotoDog = document.querySelector('#imgDog')
+fotoDog.setAttribute('src', `${picDog}`)
+}
+verDog()
+
+function toast(txt, type){
+    if(type === 'error'){
+        Toastify({
+            text: txt,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+              background: "grey",
+              fontFamily: "Gill Sans,Gill Sans MT, Calibri, Trebuchet MS, sans-serif"
+            }
+          }).showToast();
+    }else{
+        Toastify({
+            text: txt,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+              background: "salmon",
+              fontFamily: "Gill Sans,Gill Sans MT, Calibri, Trebuchet MS, sans-serif"
+            }
+          }).showToast();
+    }
+}
+
 class Contact {
     constructor(name, tel, email){
         this.name = name
@@ -8,6 +48,7 @@ class Contact {
         PHONEBOOK.push(this)
     }
 }
+
 const PHONEBOOK = [];
 const STORAGE_KEY = 'PHONEBOOK';
 const addButton = document.querySelector('#add-btn');
@@ -31,11 +72,11 @@ const createContact = (e) => {
 }
 function checkIfContactExists( obj ){
     if( PHONEBOOK.some( ( cntct ) => cntct.email === obj.email  ) ){
-       alert('Ese correo ya corresponde a un contacto', 'error')
+       toast('Ese correo ya corresponde a un contacto', 'error')
     }else{
         obj.add()
         updateDOM()
-        alert(`He añadido a ${obj.name} a tus contactos`)
+        toast(`He añadido a ${obj.name} a tus contactos`)
     }
 }
 function updateDOM(){
@@ -86,10 +127,6 @@ const editContact = (e) => {
     updateDOM()
 }
 
-
-
-
-
 const deleteContact = (e) => {
     const selectedMail = e.target.previousSibling.textContent;
     const {selectedContact, selectedIndex} = findUserAndIndex(selectedMail)
@@ -111,10 +148,24 @@ function findUserAndIndex(mail){
 }
 
 function askNewData(){
-    const newName = prompt('Nuevo nombre')
-    const newEmail = prompt('Nuevo email')
-    const newTel = prompt('Nuevo teléfono')
-
+    const verName = async () => {
+    const { value: newName } = await Swal.fire({
+        title: 'Nuevo Nombre',
+        input: 'text',
+        inputLabel: 'Ingrese su el nombre',
+      })
+    const { value: newEmail } = await Swal.fire({
+        title: 'Nuevo Email',
+        input: 'text',
+        inputLabel: 'Ingrese el nuevo email',
+      })
+    const { value: newTel } = await Swal.fire({
+        title: 'Nuevo Telefono',
+        input: 'number',
+        inputLabel: 'Ingrese el nuevo teléfono',
+        })
+    }
+    verName()
     return {
         newName : newName,
         newEmail : newEmail,
